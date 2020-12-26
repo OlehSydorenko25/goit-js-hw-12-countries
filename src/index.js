@@ -6,23 +6,20 @@ import  {layoutListCountries}  from './markup'
 import { alert, defaultModules } from '@pnotify/core';
 import * as PNotifyMobile from '@pnotify/mobile';
 defaultModules.set(PNotifyMobile, {});
-
-// --------------------------------
 import '@pnotify/core/dist/BrightTheme.css';
+import '@pnotify/core/dist/PNotify.css'
 
-
-// ----------------------------------
 
 const inputRef = document.querySelector('.input-value');
-const listCountriesRef = document.querySelector('.country');
 const articlesContainerRef = document.querySelector('.js-name-country');
-
-// listCountriesRef.addEventListener('click', layoutListCountries(data));
 
 inputRef.addEventListener('input', debounce((evt) => {
     const country = evt.target.value
+  articlesContainerRef.innerHTML = ''
 
-    articlesContainerRef.innerHTML = ''
+  if (!country) {
+    return
+  }
 
     getCountries(country).then(data => {
       if (data) {
@@ -32,28 +29,17 @@ inputRef.addEventListener('input', debounce((evt) => {
           markupSite(data);
         } else {
             layoutListCountries(data);
-            const listCountriesRef = document.querySelector('.country');
-            listCountriesRef.addEventListener('click', (evt) => {
-                console.log(evt.target);
-            });
+          const listCountriesRef = document.querySelector('.country-list');
+          
+          listCountriesRef.addEventListener('click', (evt) => {
+            const selectCounntryBtn = evt.target.textContent
+            getCountries(selectCounntryBtn).then(data => {
+              markupSite(data)
+              listCountriesRef.innerHTML = ''
+            })
+          });
         }
       }
     })
-}), 2000)
+}, 500))
 
-
-
-
-
-
-
-
-
-// (data => {
-//         console.log(data.lenght);
-//         console.log(data);
-//         if (data.lenght < 2) {
-//             markupSite(data)
-//         }
-        
-//     });

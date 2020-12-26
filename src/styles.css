@@ -2,6 +2,10 @@ html {
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none; /* Отменяем подчеркивание у ссылки */
+}
+
 *,
 *::before,
 *::after {
@@ -27,13 +31,21 @@ body {
   background-image: url('./images/bg-pattern.png');
 }
 
-.js-name-country {
-  width: 1300px;
+.js-search-form {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-left: auto;
-  margin-right: auto;
+  justify-content: center;
+}
+
+.input-value {
+  width: 250px;
+  border: 2px solid tomato;
+  border-radius: 3px;
+}
+
+.js-name-country {
+  /* width: 1300px; */
+  display: flex;
+  justify-content: center;
 }
 
 .country-item {
@@ -60,4 +72,8 @@ body {
 
 .info-list .name-country {
   color: tomato;
+}
+
+.country-list {
+  display: block;
 }
