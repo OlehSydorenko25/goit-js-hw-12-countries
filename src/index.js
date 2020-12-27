@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce';
 import getCountries from './fetchCountries' 
 import markupSite from './markup'
 import  {layoutListCountries}  from './markup'
-import { alert, defaultModules } from '@pnotify/core';
+import { alert, defaultModules, error } from '@pnotify/core/dist/PNotify';
 import * as PNotifyMobile from '@pnotify/mobile';
 defaultModules.set(PNotifyMobile, {});
 import '@pnotify/core/dist/BrightTheme.css';
@@ -22,8 +22,10 @@ inputRef.addEventListener('input', debounce((evt) => {
   }
 
     getCountries(country).then(data => {
-      if (data) {
+      
+        console.log(data);
         if (data.length > 10) {
+          console.log(data);
           alert('Too many mathces found. Please enter a more specific query!');
         } else if (data.length < 2) {
           markupSite(data);
@@ -39,7 +41,9 @@ inputRef.addEventListener('input', debounce((evt) => {
             })
           });
         }
-      }
-    })
+      
+    }).catch((error )=> {
+      alert('Such a country has not been found');
+    });
 }, 500))
 
